@@ -1,0 +1,72 @@
+class PostsController < ApplicationController
+  before_action :set_post, only: %i[ show edit update destroy ]
+  def index
+    @posts = Post.all.order(created_at: :desc)
+  end
+
+  def show
+    # Nothing to do here since set_post is already run as a before_action
+  end
+
+  def edit
+    # Nothing to do here since set_post is already run as a before_action
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def create
+    #  Rails is smart enough to extract from the white-listed params hash the title and body
+    #  needed to create the new post.
+    @post = Post.new(whitelist_params)
+    if @post.save
+      flash[:notice]="Post created successfully."
+      redirect_to post_path(@post)
+    else
+      # Error trapping
+      # Re-render the "new" article page.
+      # Because the save returned false, the error trapping on the "new" page
+      # will display the errors
+      render "new", status: :unprocessable_entity
+    end
+  end
+
+  def update
+    #  Rails is smart enough to extract from the white-listed params hash the title and body
+    #  needed to create the new post.
+    if @post.update(whitelist_params)
+      flash[:notice]="Post updated successfully."
+      redirect_to post_path(@post)
+    else
+      # Error trapping
+      # Re-render the "new" post page.
+      # Because the save returned false, the error trapping on the "new" page
+      # will display the errors
+      render "new", status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @post.destroy
+      flash[:notice]="Post deleted."
+      redirect_to posts_path
+    else
+      # Error trapping
+      # Re-render the "edit" post page.
+      # Because the save returned false, the error trapping on the "edit" page
+      # will display the errors
+      render "edit", status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def whitelist_params
+    params.expect(post: [ :title, :body ])
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+end

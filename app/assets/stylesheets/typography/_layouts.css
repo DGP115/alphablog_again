@@ -1,0 +1,19 @@
+.container,
+.grid {
+  margin: 0 auto;
+  width: 960px;
+}
+.container {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
+
+#page-background {
+  background: -webkit-linear-gradient(to right,#bdbec4, #acaee0);
+  background: -moz-linear-gradient(to right,#bdbec4, #acaee0);
+  background: linear-gradient(to right,#bdbec4, #acaee0);
+}
