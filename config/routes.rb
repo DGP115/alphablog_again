@@ -32,4 +32,9 @@ Rails.application.routes.draw do
   # delete "/posts/:id", to: "posts#destroy"
   # The short way:  NOTE:  The class name is pluralized
   resources :posts
+
+  # Users
+  # 1. Want the signup route to be /signup
+  get "signup", to: "users#new"
+  resources :users, except: %i[ new ]
 end
