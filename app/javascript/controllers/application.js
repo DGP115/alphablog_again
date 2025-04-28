@@ -12,5 +12,5 @@ export { application }
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
-//  I don't know what is does.  It is an attempt to get Bootstrap dropdown menus to function more than once...
+//  I don't know what this does.  It is an attempt to get Bootstrap dropdown menus to function more than once...
  <script>data-turbolinks-eval=false</script>

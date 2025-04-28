@@ -1,0 +1,23 @@
+<div class="container">
+  <% @users.each do |user| %>
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-2">
+        <div class="card text-center shadow mb-2 bg-white rounded">
+          <div class="card-header">
+            <i><%= link_to user.username, user_path(user), 
+                           class: "link-opacity-50-hover text-decoration-none" %></i>
+          </div>       
+          <div class="card-body">
+            <p class="card-title">
+              <%= link_to avatar_for(user, size:("100x100")), user_path(user) %>
+            </p>
+            <p class="card-text"> <%= pluralize(user.posts.count, "post")%> written</p>
+            <%= link_to "View profile", user_path(user), class: "btn btn-outline-success" %>
+            <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-primary" %>
+          </div>       
+
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

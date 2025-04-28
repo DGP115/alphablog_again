@@ -1,30 +1,11 @@
-<div class="container">
-  <% @posts.each do |post| %>
-    <div class="row justify-content-md-center">
-      <div class="col-8 mt-2">
-        <div class="card text-center shadow mb-2 bg-white rounded">
-          <div class="card body">
-            <h5 class="card-title"><%= link_to post.title, post_path(post), 
-                                               class: 'link-dark text-decoration-none' %></h5>
-            <h6 class="card-subtitle text-body-secondary">
-              by: <em><%= post.user.username if post.user %></em>
-            </h6>
-            <p class="card-text">A sample &#8677 <%= post.body.truncate(20) %></p>
-            <div class="card-footer bg-transparent">
-              <%= link_to "View", post_path(post), class: "btn btn-outline-success btn-sm" %>
-              <%= link_to "Edit", edit_post_path(post), class: "btn btn-outline-primary btn-sm" %>
-              <%= button_to "Delete", post_path(post), 
-                                      class: "btn btn-outline-danger btn-sm",
-                                      method: :delete,
-                                      data: { turbo_confirm: "Are you sure?" } %>
-            </div>       
-            <ul class="card-footer small mt-1 mb-1">
-              Created <%=time_ago_in_words(post.created_at)%> ago.
-              Edited <%=time_ago_in_words(post.updated_at)%> ago.
-            </ul>
-        </div>
-      </div>
-    </div>
-  <% end %>
+<h2 class="text-center mt-2">Articles List</h2>
+<!--Utilizing the will_paginate gem to include pagination in the rendering of the articles listing -->
+<div class="apple_pagination">
+  <%= will_paginate @posts, container: false %>
 </div>
 
+<%= render "posts/post" %>
+
+<div class="apple_pagination">
+  <%= will_paginate @posts, container: false %>
+</div>

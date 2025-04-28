@@ -1,7 +1,7 @@
 # Methods used in View pages
 module ApplicationHelper
   # --
-  # Create a funny avator for each user, using a hash of their username
+  # Create a funny avator for each user, using a hash of their username taken from Gravatar
   def avatar_for(user, options = { size: "300x300" })
     email_address = user.email_address.downcase
     hash = Digest::MD5.hexdigest(email_address)
