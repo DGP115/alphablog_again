@@ -37,4 +37,9 @@ Rails.application.routes.draw do
   # 1. Want the signup route to be /signup
   get "signup", to: "users#new"
   resources :users, except: %i[ new ]
+  # Login management
+  get "login", to: "sessions#new"
+  post "login", to: "sessions#create"
+  # Tried using delete "logout", to: "sessions#destroy" but Rails complaained that no Get route was defined
+  get "logout", to: "sessions#destroy"
 end

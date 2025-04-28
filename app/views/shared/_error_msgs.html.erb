@@ -1,8 +1,18 @@
 <% if obj.errors.any? %>
-  <h4>The following error(s) occurred while trying to save the <%= obj.class.name.downcase %> as entered:</h4>
-  <ul>
-    <% obj.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
+  <div class="container">
+    <div class="col-10">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">      
+        <h6 class="alert-heading">&#9888;The following error(s) occurred while trying to save the <%= obj.class.name.downcase %> as entered:</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>  
+
+        <ul>
+          <% obj.errors.full_messages.each do |msg| %>
+              <li class="small"><%= msg %></li>
+          <% end %>
+        </ul>
+
+      </div>
+    </div>
+  </div>
 <% end %>
+

@@ -1,0 +1,47 @@
+<h2 class="row justify-content-center mt-2">Log In</h2>
+
+<!--When using form_with helper 
+     1.  Becuase a session is not a Rails model:
+        1.1. Use scope:, instead of model:
+        1.2. We have to tell the form what url to send the form to
+     2. It normally uses ajax to submit the form.  To override that with 
+        a simple Get request:  local: true -->
+
+<div class="container justify-content-center col-7">
+  <%= form_with(scope: :session, 
+                url: login_path, 
+                local: true, 
+                class: "shadow p-3 mb-3 bg-grey rounded")  do |f| %>
+
+    <div class="row g-3 mb-1">
+      <div class="col-2 text-end">
+        <%= f.label "email:", class: "col-form-label" %>
+      </div>  
+      <div class="col-9">
+        <%= f.email_field :email_address, class: "form-control shadow rounded",
+                                          placeholder: "Enter your email address" %>
+      </div>
+    </div>
+
+    <div class="row g-3 mb-1">
+      <div class="col-2 text-end">
+        <%= f.label "password:", class: "col-form-label" %>
+      </div>
+      <div class="col-9">
+        <%= f.text_field :password, class: "form-control shadow rounded",
+                                    placeholder: "Enter your password" %>
+      </div>
+    </div>
+
+    <div class="text-center mt-2 mb-2">
+      <%= f.submit("Log In") %>
+    </div>
+
+  <% end %>
+</div>
+
+<div class="text-center mt-2 mb-2">
+  <%= link_to "[ Cancel and return to Articles Listing ]",
+              posts_path,
+              class: "text-decoration-none" %>
+</div>
