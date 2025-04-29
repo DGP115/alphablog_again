@@ -13,15 +13,13 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button"
              data-bs-toggle="dropdown" aria-expanded="false">
-            Articles
+            Posts
           </a>
           <ul class="dropdown-menu">
             <li><%= link_to "Posts List", posts_path, class: "dropdown-item" %></li>
-            <li><%= link_to "New Post", new_post_path, class: "dropdown-item" %></li>
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <% if logged_in? %>
+              <li><%= link_to "New Post", new_post_path, class: "dropdown-item" %></li>
+            <% end %>
           </ul>
         </li>
 
@@ -29,12 +27,34 @@
           <%= link_to "Bloggers", users_path, class: "nav-link active" %>
         </li>
 
-        <li class="nav-item">
-          <%= link_to "Log In", login_path, class: "nav-link active" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Log Out", logout_path, class: "nav-link active", data: { "turbo-method": :delete } %>
-        </li>
+        <% if logged_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              <strong><%= current_user.username %></strong>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Log Out", logout_path, 
+                            class: "dropdown-item", 
+                            data: { "turbo-method": :delete } %>
+            </li>
+            <li><%= link_to "My Posts", user_path(current_user), 
+                            class: "dropdown-item" %>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to "Edit My Profile", edit_user_path(current_user), 
+                            class: "dropdown-item" %>
+            </li>
+            
+          </ul>
+        <% else %>
+          <li class="nav-item">
+            <li><%= link_to "Log In", login_path, class: "nav-link active" %></li>
+          </li>
+          <li class="nav-item">
+            <li><%= link_to "Sign up!", signup_path, class: "nav-link active" %></li>
+          </li>
+        <% end %>
 
         <li class="nav-item">
           <%= link_to "About", about_path, class: "nav-link active" %>

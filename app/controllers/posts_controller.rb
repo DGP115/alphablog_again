@@ -20,6 +20,7 @@ class PostsController < ApplicationController
     #  Rails is smart enough to extract from the white-listed params hash the title and body
     #  needed to create the new post.
     @post = Post.new(whitelist_params)
+    @post.user = current_user
     if @post.save
       flash[:notice]="Post created successfully."
       redirect_to post_path(@post)

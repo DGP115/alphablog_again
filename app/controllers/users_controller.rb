@@ -7,6 +7,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(whitelist_params)
     if @user.save
+      # Set the newly created (signed-up) user as logged in
+      session[:user_id] = @user.id
+      # Welcome user and redirect
       flash[:notice]="#{@user.username.capitalize}, welcome to AlphaBlog."
       redirect_to posts_path
     else
