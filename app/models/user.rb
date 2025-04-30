@@ -10,7 +10,7 @@ class User < ApplicationRecord
                             uniqueness: { case_sensitive: false },
                             length: { maximum: 105 },
                             format: { with: VALID_EMAIL_REGEX }
-  has_many :posts
+  has_many :posts, dependent: :destroy
   # Resulting from use of bcrypt gem
   has_secure_password
 end

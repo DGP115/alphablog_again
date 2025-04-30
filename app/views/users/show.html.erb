@@ -1,4 +1,4 @@
-<h2 class="text-center mt-2"><%= "Blogger: #{@user.username}" %></h2>
+<h2 class="text-center mt-2">Blogger: <%= @user.username %></h2>
 
 <div class="text-center d-block mt-2">
   <%= avatar_for(@user, size:('100x100')) %>
@@ -10,7 +10,13 @@
 
 <% if logged_in? && @user == current_user %>
   <div class="text-center mt-2">
-    <%= link_to "Edit your profile", edit_user_path(@user), class: "btn btn-outline-primary"%>
+    <%= link_to "Edit your profile", edit_user_path(@user), class: "btn btn-outline-primary" %>
+    <%= button_to "Delete", user_path(@user), 
+                            class: "btn btn-outline-danger",  
+                            method: :delete,
+                            form: {
+                              data: { turbo_confirm: "Are you sure?" }
+                            } %>
   </div>
 <% end %>
 

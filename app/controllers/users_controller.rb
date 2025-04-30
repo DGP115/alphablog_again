@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
+  # NOTE:  These before_action methods execute in the order given, so order here is important
   before_action :set_user, only: %i[ edit update show destroy ]
+  before_action :require_user, only: %i[ edit update destroy ]
+  before_action :require_same_user, only: %i[ edit update destroy ]
   def new
     @user = User.new
   end
@@ -47,6 +50,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    session[:user_id] = nil if @user == current_user
+    @user.destroy
+    flash[:notice] = "Your account has been deleted"
+    redirect_to root_path
   end
 
   private
@@ -56,5 +63,12 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def require_same_user
+    if current_user != @user
+      flash[:alert] = "You can only modify your own profile"
+      redirect_to @user
+    end
   end
 end
