@@ -16,13 +16,13 @@
             <p class="card-text"><%= @post.body%></p>
           </div>
           
-          <% if logged_in? && @post.user == current_user %>
+          <% if (logged_in? && @post.user == current_user) || current_user.admin? %>
             <div class="card-footer bg-transparent">
               <%= link_to "Edit", edit_post_path(@post), class: "btn btn-outline-primary btn-sm" %>
               <%= button_to "Delete", post_path(@post), 
                                       class: "btn btn-outline-danger btn-sm",
                                       method: :delete,
-                                      data: { turbo_confirm: "Are you sure?" } %>
+                                        data: { turbo_confirm: "Are you sure?" } %>
               </div> 
           <% end %>
                 

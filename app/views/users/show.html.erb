@@ -1,24 +1,32 @@
-<h2 class="text-center mt-2">Blogger: <%= @user.username %></h2>
+<div class="container text-center">
+  <div class="row justify-content-md-center mt-2">
+    <div class="col-6 justify-content-md-center border border-primary">
 
-<div class="text-center d-block mt-2">
-  <%= avatar_for(@user, size:('100x100')) %>
-</div>
+      <h2 class="text-center mt-2">Blogger: <%= @user.username %></h2>
 
-<div class="text-center mt-2 text-body-secondary">
-  <h6>Joined: <%= @user.created_at.strftime("%d-%b-%Y") %></h6>
-</div>
+      <div class="text-center d-block mt-2">
+        <%= avatar_for(@user, size:('100x100')) %>
+      </div>
 
-<% if logged_in? && @user == current_user %>
-  <div class="text-center mt-2">
-    <%= link_to "Edit your profile", edit_user_path(@user), class: "btn btn-outline-primary" %>
-    <%= button_to "Delete", user_path(@user), 
-                            class: "btn btn-outline-danger",  
-                            method: :delete,
-                            form: {
-                              data: { turbo_confirm: "Are you sure?" }
-                            } %>
+      <div class="text-center mt-2 text-body-secondary">
+        <h6>Joined: <%= @user.created_at.strftime("%d-%b-%Y") %></h6>
+      </div>
+
+      <% if (logged_in? && @user == current_user) || current_user.admin? %>
+        <div class="text-center mt-2 mb-2">
+          <%= link_to "Edit your profile", edit_user_path(@user), class: "btn btn-outline-primary" %>
+          <%= button_to "Delete", user_path(@user), 
+                                  class: "btn btn-outline-danger",  
+                                  method: :delete,
+                                  form: {
+                                    data: { turbo_confirm: "Are you sure?" }
+                                  } %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>
+
 
 <% if @user.posts.count > 0 %>
   <h5 class="text-center mt-4"> Posts by: <%= @user.username %>:</h5>

@@ -54,7 +54,7 @@ class PostsController < ApplicationController
   def destroy
     if @post.destroy
       flash[:notice]="Post deleted."
-      redirect_to posts_path
+      redirect_to user_path(@post.user)
     else
       # Error trapping
       # Re-render the "edit" post page.
@@ -75,7 +75,7 @@ class PostsController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @post.user
+    if current_user != @post.user && !current_user.admin?
       flash[:alert] = "You can only modify your own posts"
       redirect_to @post
     end

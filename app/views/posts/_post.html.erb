@@ -19,7 +19,7 @@
             <% if logged_in? %>
               <%= link_to "View", post_path(post), class: "btn btn-outline-success btn-sm" %>
             <% end %>
-            <% if post.user == current_user %>
+            <% if post.user == current_user || current_user.admin? %>
               <%= link_to "Edit", edit_post_path(post), class: "btn btn-outline-primary btn-sm" %>
               <%= button_to "Delete", post_path(post), 
                                       class: "btn btn-outline-danger btn-sm",
