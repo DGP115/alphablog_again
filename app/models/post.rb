@@ -4,4 +4,6 @@ class Post < ApplicationRecord
   validates :body, presence: true,
                    length: { minimum: 6, maximum: 10000 }
   belongs_to :user
+  has_many :post_categories
+  has_many :categories, through: :post_categories
 end

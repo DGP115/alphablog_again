@@ -40,6 +40,9 @@ Rails.application.routes.draw do
   # Login management
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"
-  # Tried using delete "logout", to: "sessions#destroy" but Rails complaained that no Get route was defined
+  # Tried using delete "logout", to: "sessions#destroy" but Rails complained that no Get route was defined
   get "logout", to: "sessions#destroy"
+
+  # Categories
+  resources :categories
 end

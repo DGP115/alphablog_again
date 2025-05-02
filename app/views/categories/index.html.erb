@@ -1,0 +1,11 @@
+<h2 class="text-center mt-2">Post Categories List</h2>
+<!--Utilizing the will_paginate gem to include pagination in the rendering of the articles listing -->
+<div class="apple_pagination">
+  <%= will_paginate @categories, container: false %>
+</div>
+
+<%= render "categories/category_list" %>
+
+<div class="apple_pagination">
+  <%= will_paginate @categories, container: false %>
+</div>

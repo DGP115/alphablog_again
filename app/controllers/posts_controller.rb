@@ -67,7 +67,7 @@ class PostsController < ApplicationController
   private
 
   def whitelist_params
-    params.expect(post: [ :title, :body ])
+    params.expect(post: [ :title, :body, category_ids: [] ])
   end
 
   def set_post
