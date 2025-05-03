@@ -22,24 +22,21 @@
               <%= button_to "Delete", post_path(@post), 
                                       class: "btn btn-outline-danger btn-sm",
                                       method: :delete,
-                                        data: { turbo_confirm: "Are you sure?" } %>
-              </div> 
+                                      data: { turbo_confirm: "Are you sure?" } %>
+            </div> 
           <% end %>
                 
-          <div class="card-footer text-muted">
-            <% if @post.post_categories.any? %>
-                <!--The line below is some Rails magic to ease the display of a collection of
+          <div class="card-footer small text-muted">
+            <% if @post.categories.any? %>
+              <!--The line below is some Rails magic to ease the display of an array of
                 objects. The render function will look for a partial called "_category"
-                and pass to it each category object given by @posts.categories.
-                It is like looping through @posts.categories.each do.
-                AND, amazingly enough, Rails will look for the partial in all views folders
-                so we can put it with the other categories views -->
-              <strong>Categories:</strong><%= render @post.categories %>
+                and pass to it each category object given by post.categories.
+                It is like looping through post.categories.each do-->
+              Categories: <%= render @post.categories %>
             <% end %>
-
-            <div class="small mt-1 mb-1">
-              <ul>Created <%=time_ago_in_words(@post.created_at)%> ago.</ul>
-              <ul>Edited <%=time_ago_in_words(@post.updated_at)%> ago.</ul>
+            <div class="small mt-1">
+              <li>Created <%=time_ago_in_words(@post.created_at)%> ago.</li>
+              <li>Edited <%=time_ago_in_words(@post.updated_at)%> ago.</li>
             </div>
           </div>
         </div>

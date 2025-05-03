@@ -27,10 +27,15 @@
                                       data: { turbo_confirm: "Are you sure?" } %>
             <% end %>
           </div>       
-          <ul class="card-footer small mt-1 mb-1">
-            Created <%=time_ago_in_words(post.created_at)%> ago.
-            Edited <%=time_ago_in_words(post.updated_at)%> ago.
-          </ul>
+          <div class="card-footer small mt-1 mb-1 text-muted">
+            <% if post.categories.any? %>
+              Categories: <%= render post.categories %>
+            <% end %>
+            <div class="small mt-1">
+              <li>Created <%=time_ago_in_words(post.created_at)%> ago.</li>
+              <li>Edited <%=time_ago_in_words(post.updated_at)%> ago.</li>
+            </div>
+          </div>
         </div>
       </div>
     </div>

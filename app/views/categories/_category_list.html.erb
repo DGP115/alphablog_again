@@ -12,8 +12,8 @@
             </div>
 
             <% if category.posts.count > 0 %>
-              <div class="card-footer mt-1 mb-1">
-                <%= pluralize(category.posts.count, "Post") %> in this category
+              <div class="card-footer text-body-secondary small">
+                <%= pluralize(category.posts.count, "Post") %>
               </div>
             <% end %>
         </div>
