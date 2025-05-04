@@ -43,6 +43,8 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    # In anticipation of showing the posts for the selected category:
+    @posts = @category.posts.order(updated_at: :desc)
   end
 
   def destroy
