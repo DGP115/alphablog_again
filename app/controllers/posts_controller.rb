@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    # Nothing to do here since set_post is already run as a before_action
+    # @comments = @post.comments.roots.includes(:children)
   end
 
   def edit

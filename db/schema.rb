@@ -10,12 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_01_214951) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_06_210724) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.string "ancestry", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "body"
+    t.integer "ancestry_depth", default: 0
+    t.integer "children_count", default: 0, null: false
+    t.index ["ancestry"], name: "index_comments_on_ancestry"
+    t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
   create_table "post_categories", force: :cascade do |t|

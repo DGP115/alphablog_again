@@ -13,7 +13,7 @@
             <% end %>
           </h6>
           <div class="card card-body mt-2">
-            <p class="card-text"><%= @post.body%></p>
+            <p class="card-text text-start"><%= @post.body%></p>
           </div>
           
           <% if (logged_in? && @post.user == current_user) || current_user.admin? %>
@@ -41,6 +41,16 @@
           </div>
         </div>
       </div>
+
+      <%= render partial: "comments/form" %>
+
     </div>
+
+    <% if @post.comments.any? %>
+      <h6>Comments:</h6>
+        <%= render partial: "comments/comment", 
+                   collection: @post.comments.order("created_at desc"), as: :comment %>
+    <% end %>
+
   </div>
 </div>

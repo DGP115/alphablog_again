@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   # #  Delete post path
   # delete "/posts/:id", to: "posts#destroy"
   # The short way:  NOTE:  The class name is pluralized
-  resources :posts
+  resources :posts do
+    resources :comments, only: %i[ create destroy ]
+  end
 
   # Users
   # 1. Want the signup route to be /signup

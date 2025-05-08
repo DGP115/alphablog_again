@@ -1,0 +1,17 @@
+<div class="card my-2">
+  <div class="card-body">
+    <p class="card-text"><%= comment.body %></p>
+    <small class="text-muted">By <%= User.find(comment.user_id).username %></small>
+
+    <!-- Reply form -->
+    <div>
+      <%= render "comments/form", comment: Comment.new(parent: comment, 
+                                              post_id: comment.post.id, 
+                                              user_id: current_user.id ) %>
+    </div>
+
+    <% if comment.has_children? %>
+      <%= render partial: "comments/comment", collection: comment.children, as: :comment %>
+    <% end %>
+
+</div>
