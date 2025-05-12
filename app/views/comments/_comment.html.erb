@@ -1,7 +1,7 @@
-<div class="card my-2">
-  <div class="card-body">
+
+
     <p class="card-text"><%= comment.body %></p>
-    <small class="text-muted">By <%= User.find(comment.user_id).username %></small>
+    <small class="text-muted">By <%= User.find(comment.user_id).username %> made <%=time_ago_in_words(comment.created_at)%> ago. </small>
 
     <!-- Reply form -->
     <div>
@@ -14,4 +14,3 @@
       <%= render partial: "comments/comment", collection: comment.children, as: :comment %>
     <% end %>
 
-</div>
