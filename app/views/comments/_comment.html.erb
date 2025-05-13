@@ -1,16 +1,26 @@
-
-
-    <p class="card-text"><%= comment.body %></p>
-    <small class="text-muted">By <%= User.find(comment.user_id).username %> made <%=time_ago_in_words(comment.created_at)%> ago. </small>
-
-    <!-- Reply form -->
+<ul>
+  <% comments.each do |comment, nested_comments| %>
     <div>
-      <%= render "comments/form", comment: Comment.new(parent: comment, 
-                                              post_id: comment.post.id, 
-                                              user_id: current_user.id ) %>
+      By <%= User.find(comment.user_id).username %> made <%=time_ago_in_words(comment.created_at)%> ago.:<br>
+      <%= comment.body %>
+    </div>
+          
+    <div>
+      <!-- Reply form -->
+      <%= render partial: "comments/form", 
+                 locals: { comment: Comment.new(parent: comment, 
+                                                post_id: comment.post.id, 
+                                                user_id: current_user.id) } %>
     </div>
 
-    <% if comment.has_children? %>
-      <%= render partial: "comments/comment", collection: comment.children, as: :comment %>
+    <% if nested_comments.present? %>
+      <%= render partial: "comments/comment", locals: { comments: nested_comments } %>
     <% end %>
 
+    </div>
+
+  <% end %>
+</ul>
+
+
+  

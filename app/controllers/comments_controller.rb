@@ -11,7 +11,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    debugger
-    params.expect(comment: [ :body, :post_id, :user_id ])
+    params.expect(comment: [ :body, :post_id, :user_id, :parent_id ])
   end
 end

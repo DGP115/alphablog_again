@@ -1,14 +1,14 @@
-<%= form_with model: [ @post, @post.comments.build ], local: true do |f| %>
+<%= form_with(model: comment, url: post_comments_path(comment.post), local: true) do |f| %>
   <%= f.hidden_field :post_id %>
-  <%= f.hidden_field :user_id, value: current_user.try(:id) %>
+  <%= f.hidden_field :parent_id %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
 
   <div class="col-12">
-    <div class="card text-center shadow mb-2 bg-white rounded">
-      <div class="card-header mt-2">
-        <%= f.label :body, "Care to Comment?"  %>
-      </div>
-      <div class="card-body">
-        <%= f.text_area :body, rows:"2", class: "form-control shadow rounded mb-2"%>
+    <div class="card text-center shadow mb-1 bg-white rounded">
+      <%= f.label :body, "Care to Comment?", class: "card-title"  %>
+      <div class="input-group">
+        
+        <%= f.text_area :body, rows:"1", class: "form-control shadow rounded mb-2"%>
         <%= f.submit "Submit", class: "btn btn-outline-primary" %>
       </div>
     <div>

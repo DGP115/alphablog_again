@@ -8,7 +8,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    # @comments = @post.comments.roots.includes(:children)
+    # In preparation for showing the hierarchical comments for a post:
+    @comments = @post.comments.arrange
   end
 
   def edit
