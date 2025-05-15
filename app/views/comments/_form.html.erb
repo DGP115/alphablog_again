@@ -1,18 +1,28 @@
-<p>Reply to <%= User.find(comment.user_id).username %>?</p>
-<%= form_with(model: comment, url: post_comments_path(comment.post), local: true) do |f| %>
-  <%= f.hidden_field :post_id %>
-  <%= f.hidden_field :parent_id %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
+<div data-controller="toggle" 
+     data-toggle-initial-active-value="true"
+     data-toggle-class-value="myhidden">
 
-  <div class="col-12">
-    <div class="card text-center shadow mb-1 bg-white rounded">
-      <%= f.label :body, "Care to Comment?", class: "card-title"  %>
-      <div class="input-group">
-        
-        <%= f.text_area :body, rows:"1", class: "form-control shadow rounded mb-2"%>
-        <button type="button", class="btn btn-outline-dark btn-sm"> <%= f.submit "Submit" %></button>
+  <span data-action="click->toggle#toggle" class="mylink mb-3">
+    Reply to <em><%= User.find(comment.user_id).username %></em>?
+  </span>
+
+  <div data-toggle-target="content">
+    <%= form_with(model: comment, url: post_comments_path(comment.post), local: true) do |f| %>
+      <%= f.hidden_field :post_id %>
+      <%= f.hidden_field :parent_id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+
+      <div class="col-12">
+        <div class="card text-center shadow mb-1 bg-white rounded">
+          <%= f.label :body, "Care to Comment?", class: "card-title"  %>
+          <div class="input-group">
+            
+            <%= f.text_area :body, rows:"1", class: "form-control shadow rounded mb-2"%>
+            <button type="button", class="btn btn-outline-dark btn-sm"> <%= f.submit "Submit" %></button>
+          </div>
+        <div>
       </div>
-    <div>
-  </div>
 
-<% end %>
+    <% end %>
+  </div>
+</div>

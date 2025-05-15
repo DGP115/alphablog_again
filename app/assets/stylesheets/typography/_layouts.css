@@ -17,3 +17,7 @@
   background: -moz-linear-gradient(to right,#bdbec4, #acaee0);
   background: linear-gradient(to right,#bdbec4, #acaee0);
 }
+
+.myhidden {
+     display:none;
+}
