@@ -1,3 +1,4 @@
+<p>Reply to <%= User.find(comment.user_id).username %>?</p>
 <%= form_with(model: comment, url: post_comments_path(comment.post), local: true) do |f| %>
   <%= f.hidden_field :post_id %>
   <%= f.hidden_field :parent_id %>
@@ -9,7 +10,7 @@
       <div class="input-group">
         
         <%= f.text_area :body, rows:"1", class: "form-control shadow rounded mb-2"%>
-        <%= f.submit "Submit", class: "btn btn-outline-primary" %>
+        <button type="button", class="btn btn-outline-dark btn-sm"> <%= f.submit "Submit" %></button>
       </div>
     <div>
   </div>
