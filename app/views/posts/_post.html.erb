@@ -13,7 +13,9 @@
                                             class: 'link-dark text-decoration-none' %>
           </h5>
 
-          <p class="card-text">A sample &#8677 <%= post.body.truncate(20) %></p>
+          <p class="card-text">
+            A sample &#8677 <%= truncate(strip_tags(post.body.to_s), length: 20) %>
+          </p>
 
           <div class="card-footer bg-transparent">
             <% if logged_in? %>

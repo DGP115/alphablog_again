@@ -13,11 +13,11 @@ class SessionsController < ApplicationController
     else
       # Error trapping
       # Re-render the "new" session page (i.e. the login page).
-      # Becuase we are not dealing with a model here, must display the error message to user direcly
+      # Because we are not dealing with a model here, must display the error message to user directly
       # Using flash.now here because we are not executing a re-direct here, so we want to display the
       # error message when the login form is re-displayed
       flash.now[:alert] = "Entered credentials are not correct"
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 

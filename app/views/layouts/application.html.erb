@@ -22,17 +22,14 @@
     <%# Bootstrap icons %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%# <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%# javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= javascript_importmap_tags %>
-    <%# I don't know what this does except that it seems deeded to get turbo_confirm messages to appear %>
-    <%#= javascript_include_tag "turbo", type: "module" %>
+
   </head>
 
   <body class="d-flex flex-column min-vh-100">
-    
-
 
     <div id=page-background>
       <%= render "layouts/navbar" %>
