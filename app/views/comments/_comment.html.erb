@@ -1,26 +1,30 @@
-<ul>
-  <% comments.each do |comment, nested_comments| %>
-    <div>
-      By <%= User.find(comment.user_id).username %> made <%=time_ago_in_words(comment.created_at)%> ago.:<br>
-      <%= comment.body %>
-    </div>
-          
-    <div>
-      <!-- Reply form -->
-      <%= render partial: "comments/form", 
-                 locals: { comment: Comment.new(parent: comment, 
-                                                post_id: comment.post.id, 
-                                                user_id: current_user.id) } %>
-    </div>
+<div>
+  <ul>
+    <% comments.each do |comment, nested_comments| %>
+      <div>
+        By <%= User.find(comment.user_id).username %> made <%=time_ago_in_words(comment.created_at)%> ago.:<br>
+        <div class="fst-italic fw-lighter">
+          <%= comment.body %>
+        </div>
+      </div>
+            
+      <div>
+        <!-- Reply form -->
+        <%= render partial: "comments/form", 
+                  locals: { comment: Comment.new(parent: comment, 
+                                                  post_id: comment.post.id, 
+                                                  user_id: current_user.id) } %>
+      </div>
 
-    <% if nested_comments.present? %>
-      <%= render partial: "comments/comment", locals: { comments: nested_comments } %>
+      <% if nested_comments.present? %>
+        <div>
+          <%= render partial: "comments/comment", locals: { comments: nested_comments } %>
+        </div>
+      <% end %>
+
     <% end %>
-
-    </div>
-
-  <% end %>
-</ul>
+  </ul>
+</div>
 
 
   

@@ -3,7 +3,7 @@
      data-toggle-class-value="myhidden">
 
   <span data-action="click->toggle#toggle" class="mylink mb-3">
-    Reply to <em><%= User.find(comment.user_id).username %></em>?
+    <i class="fs-4 bi bi-chat-dots"></i>
   </span>
 
   <div data-toggle-target="content">
@@ -12,15 +12,11 @@
       <%= f.hidden_field :parent_id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
 
-      <div class="col-12">
-        <div class="card text-center shadow mb-1 bg-white rounded">
-          <%= f.label :body, "Care to Comment?", class: "card-title"  %>
-          <div class="input-group">
-            
-            <%= f.text_area :body, rows:"1", class: "form-control shadow rounded mb-2"%>
-            <button type="button", class="btn btn-outline-dark btn-sm"> <%= f.submit "Submit" %></button>
-          </div>
-        <div>
+      <div class="col-10">
+        <div class="input-group">
+          <%= f.text_area :body, rows:"1", class: "form-control shadow rounded mb-2"%>
+          <button type="button", class="btn  btn-sm"> <%= f.submit "Submit" %></button>
+        </div>
       </div>
 
     <% end %>
