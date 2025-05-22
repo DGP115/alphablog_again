@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # delete "/posts/:id", to: "posts#destroy"
   # The short way:  NOTE:  The class name is pluralized
   resources :posts do
-    resources :comments, only: %i[ create destroy ]
+    resources :comments, only: %i[ create edit update destroy ]
   end
 
   # Users
