@@ -45,6 +45,13 @@ class CategoriesController < ApplicationController
   def show
     # In anticipation of showing the posts for the selected category:
     @posts = @category.posts.order(updated_at: :desc)
+    # @userlist = Array.new
+    # @posts.each do |post|
+    #   if @userlist.find { |user| user[:id] == post.user_id }
+    #   else
+    #     @userlist << { id: post.user_id, username: User.find(post.user_id).username }
+    #   end
+    # end
   end
 
   def destroy
