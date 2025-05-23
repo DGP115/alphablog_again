@@ -14,4 +14,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   # Resulting from use of bcrypt gem
   has_secure_password
+
+  # Based on use of Noticed gem
+  has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
 end

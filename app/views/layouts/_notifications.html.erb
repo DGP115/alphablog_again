@@ -1,0 +1,26 @@
+<% if current_user %>
+  <li class="nav-item dropdown dropstart">
+    <a class="nav-link dropdown-toggle" href="#" 
+       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+       <span class="badge rounded-pill text-bg-info">
+          <%= @notifications_unread.count >= 9 ? "9+" : @notifications_unread.count %> 
+          <i class="bi bi-chat-dots"></i>
+       </span>
+    </a>
+    <ul class="dropdown-menu">
+      <% @notifications_unread.each do |notification| %>
+        <%= render "layouts/notification", notification: notification %>
+      <% end %>
+      <% if @notifications_unread.count > 0 && @notifications_read.count > 0 %>
+        <li><hr class="dropdown-divider"></li>
+      <% elsif @notifications_unread.count == 0 && @notifications_read.count == 0 %>
+        <li class="dropdown-item">
+          No notifications
+        </li>
+      <% end %>
+      <% @notifications_read.each do |notification| %>>
+        <%= render "layouts/notification", notification: notification %>
+      <% end %>
+    </ul>
+  </li>
+<% end %>

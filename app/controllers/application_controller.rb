@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :set_notifications, if: :current_user
+  #
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
@@ -22,5 +24,11 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "You must be logged in to perform that action"
       redirect_to login_path
     end
+  end
+
+  def set_notifications
+    notifications = current_user.notifications.newest_first
+    @notifications_unread = notifications.unread
+    @notifications_read = notifications.read
   end
 end
