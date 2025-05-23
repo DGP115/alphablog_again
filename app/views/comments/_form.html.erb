@@ -3,7 +3,7 @@
      data-toggle-class-value="myhidden">
 
   <span data-action="click->toggle#toggle" class="mylink mb-3">
-    <i class="fs-4 bi bi-chat-dots"></i>
+    <i class="fs-5 bi bi-chat-dots"></i>
   </span>
 
   <div data-toggle-target="content">
@@ -16,11 +16,11 @@
         <div class="input-group">
           <%= f.text_area :body, autofocus: true, rows:"1", class: "form-control shadow rounded mb-2" %>
           <!-- <button type="button", class="btn  btn-sm"> <%= f.submit "Submit" %></button>  -->
+
           <%= f.button nil do %>
             <i class= "bi bi-floppy"></i>
           <% end %>
-     
-          <%= button_tag "", class:"bi bi-x-circle", type: "hidden", value:"cancel" %>
+
         </div>
       </div>
 

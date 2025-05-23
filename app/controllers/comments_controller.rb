@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_post, only: %i[ create edit update destroy ]
   before_action :set_comment, only: %i[ edit update destroy]
-  before_action :check_for_cancel, only: %i[ update ]
   def create
     @comment = @post.comments.create(comment_params)
     redirect_to post_path(@post)
@@ -40,11 +39,5 @@ class CommentsController < ApplicationController
 
   def set_comment
     @comment = @post.comments.find(params[:id])
-  end
-
-  def check_for_cancel
-    if params[:button] == "cancel"
-      redirect_to post_path(@post)
-    end
   end
 end
