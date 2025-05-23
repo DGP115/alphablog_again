@@ -1,0 +1,23 @@
+<%= form_with(model: comment, 
+              url: post_comment_path(comment.post, comment), 
+              local: true) do |f| %>
+  <%= f.hidden_field :post_id %>
+  <%= f.hidden_field :parent_id %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <div class="col-10">
+    <div class="input-group">
+      <%= f.text_area :body, rows:"1", autofocus: true, class: "form-control shadow rounded mb-2"%>
+      
+      <%= f.button nil do %>
+        <i class= "bi bi-floppy"></i>
+      <% end %>
+  
+    </div>
+  </div>
+
+<% end %> 
+
+
+
+

@@ -4,17 +4,31 @@
       <div class="fw-light">
         By <em><%= comment.user.username %></em> made <%=time_ago_in_words(comment.created_at)%> ago.:<br>
         <div class="fst-italic fw-lighter">
-          <%= comment.body %>
-          <% if comment.user_id == current_user.id || current_user.admin? %>
-            <%= link_to "", edit_post_comment_path(comment.post_id, comment.id), 
-                        class:"bi bi-pencil-square",
-                        style: "background-color: transparent; border: transparent;" %>
-            <%= button_to "", post_comment_path(post_id: comment.post.id, id: comment.id),
-                              class: "bi bi-trash", 
-                              style: "background-color: transparent; border: transparent;",
-                              method: :delete,
-                              data: { turbo_confirm: "Are you sure?" } %>
-          <% end %>
+          <div id="comment-body-<%=comment.id%>">
+            <%= comment.body %>
+          
+            <% if comment.user_id == current_user.id || current_user.admin? %>
+              <%= button_to "", nil, remote: true, class: "bi bi-pencil",
+                                style: "background-color: transparent; border: transparent;",
+                                data: {
+                                  controller: "comment",
+                                  action: "comment#toggleForm",
+                                  comment_form_param: "edit-form-#{comment.id}"
+                                } %>
+              <%= button_to "", post_comment_path(post_id: comment.post.id, id: comment.id),
+                                class: "bi bi-trash", 
+                                style: "background-color: transparent; border: transparent;",
+                                method: :delete,
+                                data: { turbo_confirm: "Are you sure?" } %>
+            <% end %>
+
+          </div>
+
+          <div id="edit-form-<%=comment.id%>" class="myhidden">
+            <%= render partial: "comments/edit", locals: { comment: comment, 
+                                                          post_id: comment.post.id, 
+                                                          user_id: current_user.id } %>
+          </div>
 
         </div>
       </div>

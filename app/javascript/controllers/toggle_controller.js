@@ -18,9 +18,13 @@ export default class extends Controller {
     }
   }
 
-  toggle() {
+  toggle(event) {
     // use the classValue passed by our View via data-toggle-class-value to override the class in the View when teh click event occurs
     let classToToggle = this.classValue;
     this.contentTarget.classList.toggle(classToToggle);
+    //  These two lines stop the browser from scrolling to the top whenever
+    //  this method is called
+    event.preventDefault();
+    event.stopPropagation();
   }
 }
