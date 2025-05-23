@@ -66,3 +66,5 @@ gem "bootstrap", "~> 5.3.5"
 gem "dartsass-rails", "~> 0.5.1"
 gem "will_paginate", "~> 4.0"
 gem "ancestry"
+
+gem "noticed", "~> 2.7"
