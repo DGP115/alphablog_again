@@ -22,6 +22,7 @@ class NewCommentNotifier < ApplicationNotifier
   #
   # required_param :message
   #
+
   notification_methods do
     def message
       @post = Post.find(params[:comment][:post_id])

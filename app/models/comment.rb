@@ -14,7 +14,7 @@ class Comment < ApplicationRecord
   private
 
   def notify_recipient
-    NewCommentNotifier.with(comment: self, post: post).deliver_later(post.user)
+    NewCommentNotifier.with(record: post, comment: self, post: post).deliver_later(post.user)
   end
 
   def cleanup_notifications

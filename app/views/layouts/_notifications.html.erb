@@ -2,10 +2,16 @@
   <li class="nav-item dropdown dropstart">
     <a class="nav-link dropdown-toggle" href="#" 
        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-       <span class="badge rounded-pill text-bg-info">
-          <%= @notifications_unread.count >= 9 ? "9+" : @notifications_unread.count %> 
-          <i class="bi bi-chat-dots"></i>
-       </span>
+       <% if @notifications_unread.count == 0 %>
+         <span class="badge rounded-pill text-bg-light">
+           <i class="bi bi-bell"></i>
+         </span>
+       <% else %>
+        <span class="badge rounded-pill text-bg-info">
+            <%= @notifications_unread.count >= 9 ? "9+" : @notifications_unread.count %> 
+            <i class="bi bi-bell"></i>
+        </span>
+       <% end %>
     </a>
     <ul class="dropdown-menu">
       <% @notifications_unread.each do |notification| %>
@@ -18,7 +24,7 @@
           No notifications
         </li>
       <% end %>
-      <% @notifications_read.each do |notification| %>>
+      <% @notifications_read.each do |notification| %>
         <%= render "layouts/notification", notification: notification %>
       <% end %>
     </ul>

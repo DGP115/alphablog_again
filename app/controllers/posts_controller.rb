@@ -10,6 +10,8 @@ class PostsController < ApplicationController
   def show
     # In preparation for showing the hierarchical comments for a post:
     @comments = @post.comments.arrange
+    # Update counter that the notification for this post has been read
+    mark_notifications_as_read
   end
 
   def edit
@@ -79,6 +81,13 @@ class PostsController < ApplicationController
     if current_user != @post.user && !current_user.admin?
       flash[:alert] = "You can only modify your own posts"
       redirect_to @post
+    end
+  end
+
+  def mark_notifications_as_read
+    if current_user
+      notifications_to_mark_as_read = @post.notifications.where(recipient: current_user)
+      notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
     end
   end
 end
