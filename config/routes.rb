@@ -47,4 +47,7 @@ Rails.application.routes.draw do
 
   # Categories
   resources :categories
+
+  # Search
+  get "search", to: "search#index"
 end

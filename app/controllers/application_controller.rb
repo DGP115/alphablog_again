@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
+  #  For noticed gem operation
   before_action :set_notifications, if: :current_user
+
+  # For the ransack gem used to implement search
+  before_action :set_query
+  #
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
@@ -29,5 +34,11 @@ class ApplicationController < ActionController::Base
     notifications = current_user.notifications.newest_first.includes(:event)
     @notifications_unread = notifications.unread
     @notifications_read = notifications.read
+  end
+
+  def set_query
+    # the 'q' variable comes from ransach gem
+    # This method must be in this base controller class becuase search is invoked from the navbar
+    @query = Post.ransack(params[:q])
   end
 end

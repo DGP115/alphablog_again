@@ -20,7 +20,7 @@
       <% if @notifications_unread.count > 0 && @notifications_read.count > 0 %>
         <li><hr class="dropdown-divider"></li>
       <% elsif @notifications_unread.count == 0 && @notifications_read.count == 0 %>
-        <li class="dropdown-item">
+        <li class="dropdown-item dflex justify-content-sm-end">
           No notifications
         </li>
       <% end %>

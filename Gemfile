@@ -68,3 +68,6 @@ gem "will_paginate", "~> 4.0"
 gem "ancestry"
 
 gem "noticed", "~> 2.7"
+
+# To assist with a general Search capability
+gem "ransack", "~> 4.3"

@@ -20,4 +20,12 @@ class Comment < ApplicationRecord
   def cleanup_notifications
     notifications_as_comment.destroy_all
   end
+
+  # To support searching.
+  # NOTE:  The methods MUST have the names used
+  #   [or figure out how to tell ransack gem they have a different same,
+  #   which didn't seem worthwhile]
+  def self.ransackable_attributes(auth_object = nil)
+    [ "body", "title" ]
+  end
 end

@@ -17,4 +17,18 @@ class User < ApplicationRecord
 
   # Based on use of Noticed gem
   has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
+
+  private
+
+  # To support searching.
+  # NOTE:  The methods MUST have the names used
+  #   [or figure out how to tell ransack gem they have a different same,
+  #   which didn't seem worthwhile]
+  def self.ransackable_attributes(auth_object = nil)
+    [ "username", "email_address" ]
+  end
+
+   def self.ransackable_associations(auth_object = nil)
+    [ "comments", "notifications", "posts" ]
+   end
 end
