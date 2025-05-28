@@ -58,7 +58,7 @@ class UsersController < ApplicationController
 
   private
   def whitelist_params
-    params.expect(user: [ :username, :email_address, :password ])
+    params.expect(user: [ :username, :email_address, :password, :role ])
   end
 
   def set_user

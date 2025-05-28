@@ -18,6 +18,9 @@ class User < ApplicationRecord
   # Based on use of Noticed gem
   has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
 
+  # REMINDER: database columns that model enums are type integer
+  enum :role, %i[ user admin ], default: :user
+
   private
 
   # To support searching.
@@ -28,7 +31,11 @@ class User < ApplicationRecord
     [ "username", "email_address" ]
   end
 
-   def self.ransackable_associations(auth_object = nil)
+  def self.ransackable_associations(auth_object = nil)
     [ "comments", "notifications", "posts" ]
-   end
+  end
+
+  def set_default_role
+    self.role ||= :user
+  end
 end
