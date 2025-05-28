@@ -1,4 +1,4 @@
-<h3 class="text-center"><%=pluralize(@posts.count, "Result") %></h3>
+<h5 class="text-center mt-2"><%=pluralize(@posts.count, "Search Result") %></h5>
 <%= render "search/form" %>
 
 <div class="container mt-2">
@@ -19,7 +19,7 @@
       <% @posts.each do |post| %>
         <tr>
           <td><%= link_to post.title, post_path(post), class: "text-decoration-none" %></td>
-          <td><%= truncate(strip_tags(post.body.to_s), length: 20) %></td>
+          <td><%= truncate(strip_tags(post.body.to_s), length: 30) %></td>
           <td><%= post.updated_at.strftime("%e""-""%b""-""%Y") %></td>
           <td><%= link_to post.user.username, post.user, class: "text-decoration-none" %></td>
         </tr>

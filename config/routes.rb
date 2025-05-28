@@ -50,4 +50,5 @@ Rails.application.routes.draw do
 
   # Search
   get "search", to: "search#index"
+  get "clear", to: "search#clear"
 end

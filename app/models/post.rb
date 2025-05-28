@@ -17,10 +17,10 @@ private
 
   # Ransack gem support
   # The below defines a custom ransack attribute called `post_updated_at`.
-  #     - that maps to posts.updated_at.  This is so that when sorting by "updated_at"
-  #       ransack knows to use that column of the post, versus every other model that has a
-  #       column of that name.
-  #  'formatter: ->(v) { v } do |parent|' is an Identity lambda.  It leaves the value untouched
+  #    - that maps to posts.updated_at.  This is so that when sorting by "updated_at"
+  #      ransack knows to specifically use that column of the post, versus every other 
+  #      model that has a column of that name.
+  #   -  'formatter: ->(v) { v } do |parent|' is an Identity lambda.  It leaves the value untouched
   #     (no formatting), so I don't know why it is still needed
 
   ransacker :post_updated_at, formatter: ->(v) { v } do |parent|
