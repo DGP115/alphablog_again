@@ -51,4 +51,13 @@ Rails.application.routes.draw do
   # Search
   get "search", to: "search#index"
   get "clear", to: "search#clear"
+
+  # Notifications
+  resources :notifications, only: %i[ destroy ] do
+    delete "destroy", to: "notification#destroy", on: :member
+    collection do
+      delete "destroy_all_read", to: "notifications#destroy_all_read"
+      delete "destroy_all_unread", to: "notifications#destroy_all_unread"
+    end
+  end
 end

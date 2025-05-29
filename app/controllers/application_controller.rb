@@ -30,15 +30,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Part of noticed gem application
   def set_notifications
     notifications = current_user.notifications.newest_first.includes(:event)
     @notifications_unread = notifications.unread
     @notifications_read = notifications.read
   end
 
+  # Part of ransack gem application
   def set_query
     # the 'q' variable comes from ransach gem
-    # This method must be in this base controller class becuase search is invoked from the navbar
+    # This method must be in this base controller class because search is invoked from the navbar
+    # This method sets the query as given by the "ransackable" methods in each relevant model
     @query = Post.ransack(params[:q])
   end
 end

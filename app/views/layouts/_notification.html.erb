@@ -1,3 +1,8 @@
 <li class="dropdown-item">
   <%= link_to notification.message, notification.url %>
+  <%= button_to "", notification_path(notification), 
+                  method: :delete, 
+                  data: { turbo_confirm: "Are you sure?" }, 
+                  class: "bi bi-x-circle",
+                  style: "background-color: transparent; border: transparent;" %>
 </li>
