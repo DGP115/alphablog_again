@@ -22,5 +22,8 @@ export default class extends Controller {
     // use the classValue passed by our View via data-toggle-class-value to override the class in the View when teh click event occurs
     let classToToggle = this.classValue;
     this.contentTarget.classList.toggle(classToToggle);
+    // Try to find a textarea inside and focus it
+    const textarea = this.contentTarget.querySelector("textarea")
+    if (textarea) textarea.focus()
   }
 }
