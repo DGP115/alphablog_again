@@ -7,11 +7,9 @@
 
   <div class="col-10">
     <div class="input-group">
-      <%= f.text_area :body, rows:"1", autofocus: true, class: "form-control shadow rounded mb-2"%>
+      <%= f.text_area :body, rows:"1", class: "form-control shadow rounded mb-2"%>
       
-      <%= f.button nil do %>
-        <i class= "bi bi-floppy"></i>
-      <% end %>
+      <%= f.submit "", class: "mysaveicon" %>
   
     </div>
   </div>

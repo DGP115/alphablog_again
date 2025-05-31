@@ -75,6 +75,9 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => e
+    flash[:alert] = "#{e.message}"
+    redirect_to posts_path
   end
 
   def require_same_user

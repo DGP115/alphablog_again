@@ -8,10 +8,6 @@ class Comment < ApplicationRecord
 
   # Using the Noticed gem
   after_create_commit :notify_recipient
-  # before_destroy :cleanup_notifications
-  # has_noticed_notifications model_name: "Notification"
-  # has_many :notifications_as_comment, as: :record, class_name: "Notification", dependent: :destroy
-  has_many :notification_events, as: :record, class_name: "Noticed::Event", dependent: :destroy
 
   private
 
@@ -19,11 +15,7 @@ class Comment < ApplicationRecord
     NewCommentNotifier.with(record: post, comment: self, post: post).deliver_later(post.user)
   end
 
-  def cleanup_notifications
-    notifications_as_comment.destroy_all
-  end
-
-  # To support searching.
+  # To support searching with ransack gem.
   # NOTE:  The methods MUST have the names used
   #   [or figure out how to tell ransack gem they have a different same,
   #   which didn't seem worthwhile]

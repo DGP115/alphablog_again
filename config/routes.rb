@@ -54,7 +54,7 @@ Rails.application.routes.draw do
 
   # Notifications
   resources :notifications, only: %i[ destroy ] do
-    delete "destroy", to: "notification#destroy", on: :member
+    delete "destroy", to: "notifications#destroy", on: :member
     collection do
       delete "destroy_all_read", to: "notifications#destroy_all_read"
       delete "destroy_all_unread", to: "notifications#destroy_all_unread"
