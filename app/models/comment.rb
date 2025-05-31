@@ -8,8 +8,10 @@ class Comment < ApplicationRecord
 
   # Using the Noticed gem
   after_create_commit :notify_recipient
-  before_destroy :cleanup_notifications
-  has_noticed_notifications model_name: "Notification"
+  # before_destroy :cleanup_notifications
+  # has_noticed_notifications model_name: "Notification"
+  # has_many :notifications_as_comment, as: :record, class_name: "Notification", dependent: :destroy
+  has_many :notification_events, as: :record, class_name: "Noticed::Event", dependent: :destroy
 
   private
 

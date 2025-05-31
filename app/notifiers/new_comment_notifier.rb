@@ -25,14 +25,20 @@ class NewCommentNotifier < ApplicationNotifier
 
   notification_methods do
     def message
-      @post = Post.find(params[:comment][:post_id])
-      @comment = Comment.find(params[:comment][:id])
-      @user = User.find(@comment.user_id)
-      "#{@user.username} commented on post: #{@post.title.truncate(10)}"
+      if params[:comment] != nil
+        @post = Post.find(params[:comment][:post_id])
+        @comment = Comment.find(params[:comment][:id])
+        @user = User.find(@comment.user_id)
+        "#{@user.username} commented on post: #{@post.title.truncate(10)}"
+      end
     end
     #
     def url
-      post_path(Post.find(params[:comment][:post_id]))
+      if params[:comment] != nil
+        if params[:comment][:post_id] != nil
+          post_path(Post.find(params[:comment][:post_id]))
+        end
+      end
     end
   end
 end
