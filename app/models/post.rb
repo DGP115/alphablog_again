@@ -1,4 +1,7 @@
 class Post < ApplicationRecord
+  #  To support use of friendly_id gem
+  extend FriendlyId
+  #
   validates :title, presence: true,
                     length: { minimum: 2, maximum: 100 }
   validates :body, presence: true,
@@ -12,6 +15,15 @@ class Post < ApplicationRecord
   # Based on use of Noticed gem
   has_many :noticed_events, as: :record, dependent: :destroy, class_name: "Noticed::Event"
   has_many :notifications, through: :noticed_events, class_name: "Noticed::Notification"
+
+  #  To support use of friendly_id gem
+  #  The "finders" helper enables set_post methods to work as if we coded Post.friendly.find(params[:id])
+  friendly_id :title, use: %i[ slugged history finders ]
+
+  # This method is a callback used by friendly_id gem
+  def should_generate_new_friendly_id?
+    title_changed? || super
+  end
 
 private
 

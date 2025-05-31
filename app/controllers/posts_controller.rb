@@ -73,11 +73,15 @@ class PostsController < ApplicationController
     params.expect(post: [ :title, :body, category_ids: [] ])
   end
 
+  # The "friendly" is part of the friendly_id gem.
+
   def set_post
     @post = Post.find(params[:id])
+
+    # If the post is not found, then ActiveRecord::RecordNotFound will be raised
   rescue ActiveRecord::RecordNotFound => e
-    flash[:alert] = "#{e.message}"
-    redirect_to posts_path
+        flash[:alert] = "#{e.message}"
+        redirect_to posts_path
   end
 
   def require_same_user

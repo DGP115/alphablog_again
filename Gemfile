@@ -71,3 +71,6 @@ gem "noticed", "~> 2.7"
 
 # To assist with a general Search capability
 gem "ransack", "~> 4.3"
+
+# To Support more easily read urls
+gem "friendly_id", "~> 5.5.0"
