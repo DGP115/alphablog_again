@@ -11,7 +11,7 @@
             <p class="card-title">
               <%= link_to avatar_for(user, size:("100x100")), user_path(user) %>
             </p>
-            <p class="card-text"> <%= pluralize(user.posts.count, "post")%> written</p>
+            <p class="card-text"> <%= pluralize(user.posts_count, "post")%> written</p>
             <% if logged_in? %>
               <%= link_to "View profile", user_path(user), class: "btn btn-outline-success" %>
             <% end %>

@@ -27,9 +27,9 @@
   </div>
 </div>
 
-
-<% if @user.posts.count > 0 %>
-  <h5 class="text-center mt-4"> Posts by: <%= @user.username %>:</h5>
+<% if @user.posts_count > 0 %>
+  <h5 class="text-center mt-4">
+    <%= pluralize(@user.posts_count, "Post")%> by: <%= @user.username %>:</h5>
   <div class="apple_pagination">
     <%= will_paginate @posts, container: false %>
   </div>

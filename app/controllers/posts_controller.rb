@@ -4,12 +4,15 @@ class PostsController < ApplicationController
   before_action :require_user, except: %i[ show index ]
   before_action :require_same_user, only: %i[ edit update destroy ]
   def index
-    @posts = Post.paginate(page: params[:page], per_page: 5).order(created_at: :desc)
+    # Note use of .includes to remove n+1 queries
+    @posts = Post.includes(:user, :categories, :rich_text_body)
+                 .paginate(page: params[:page], per_page: 5).order(created_at: :desc)
   end
 
   def show
     # In preparation for showing the hierarchical comments for a post:
-    @comments = @post.comments.arrange
+    # The .arrange method is part of ancestry gem
+    @comments = @post.comments.includes(:user).arrange
     # Update counter that the notification for this post has been read
     mark_notifications_as_read
   end
@@ -27,6 +30,7 @@ class PostsController < ApplicationController
     #  needed to create the new post.
     @post = Post.new(whitelist_params)
     @post.user = current_user
+    current_user.posts_count += 1
     if @post.save
       flash[:notice]="Post created successfully."
       redirect_to post_path(@post)

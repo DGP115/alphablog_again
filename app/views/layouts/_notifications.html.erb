@@ -18,13 +18,13 @@
         <%= render "layouts/notification", notification: notification %>
       <% end %>
       <% if @notifications_unread.count > 0 %>
-          <li><%= button_to "  All Unread", destroy_all_unread_notifications_path, 
-                            class: "bi bi-trash ms-2",
-                            style: "background-color: transparent; border: transparent;",
-                            method: :delete,
-                            data: { turbo_confirm: "Are you sure?" } %>
-          </li>
-          <li><hr class="dropdown-divider"></li>
+        <li><%= button_to "  All Unread", destroy_all_unread_notifications_path, 
+                          class: "bi bi-trash ms-2",
+                          style: "background-color: transparent; border: transparent;",
+                          method: :delete,
+                          data: { turbo_confirm: "Are you sure?" } %>
+        </li>
+        <li><hr class="dropdown-divider"></li>
       <% elsif @notifications_unread.count == 0 && @notifications_read.count == 0 %>
         <li class="dropdown-item dflex justify-content-sm-end">
           No notifications

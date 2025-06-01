@@ -42,7 +42,8 @@ class UsersController < ApplicationController
 
   def show
     # In preparation for the user's show page, get all of the posts authored by this user
-    @posts = @user.posts.paginate(page: params[:page], per_page: 5).order(updated_at: :desc)
+    @posts = @user.posts.includes(:rich_text_body, :categories)
+                        .paginate(page: params[:page], per_page: 5).order(updated_at: :desc)
   end
 
   def index
