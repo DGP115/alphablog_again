@@ -80,6 +80,6 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
   #
   #  DGP-specific
-  Bullet.add_safelist type: :unused_eager_loading, class_name: "Post", association: :categories
-  Bullet.add_safelist type: :eager_loading, class_name: "Post", association: :categories
+  # Bullet.add_safelist type: :unused_eager_loading, class_name: "Post", association: :categories
+  # Bullet.add_safelist type: :eager_loading, class_name: "Post", association: :categories
 end
