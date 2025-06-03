@@ -8,6 +8,10 @@ class UsersController < ApplicationController
   end
 
   def create
+    # NOTE:  When a new user signes up, the form includes a password and a password confirmation field
+    # Magically, if those entries do not match, teh error will be trapped by @user.save below
+    # and the errors will be displayed on the "new" user page.
+    # If the password and confirmation match, then create a new user
     @user = User.new(whitelist_params)
     if @user.save
       # Set the newly created (signed-up) user as logged in
@@ -59,7 +63,7 @@ class UsersController < ApplicationController
 
   private
   def whitelist_params
-    params.expect(user: [ :username, :email_address, :password, :role ])
+    params.expect(user: [ :username, :email_address, :password, :password_confirmation ])
   end
 
   def set_user
