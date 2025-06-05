@@ -9,6 +9,8 @@ class SearchController < ApplicationController
 
       # @posts = @query.result(distinct: true).includes(:user, :categories, :comments)
       @posts = @query.result(distinct: true)
+                     .includes(:rich_text_body, :user)
+                     .paginate(page: params[:page], per_page: 10)
     end
   end
 
