@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     #  needed to create the new post.
     @post = Post.new(whitelist_params)
     @post.user = current_user
-    current_user.posts_count += 1
+
     if @post.save
       flash[:notice]="Post created successfully."
       redirect_to post_path(@post)

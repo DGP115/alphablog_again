@@ -1,0 +1,14 @@
+<% if unread_count == 0 %>
+  <span class="badge rounded-pill text-bg-light">
+    <i class="bi bi-bell"></i>
+  </span>
+<% else %>
+  <!--NOTE:  id="notifications" used here as the target for the Turbo Stream 
+             broadcast from comment-->
+  <span class="badge rounded-pill text-bg-info" id="notifications">
+    <%= unread_count >= 9 ? "9+" : unread_count %> 
+    <i class="bi bi-bell"></i>
+  </span>
+
+<% end %>
+

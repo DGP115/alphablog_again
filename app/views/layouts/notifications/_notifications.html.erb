@@ -1,22 +1,21 @@
 <% if current_user %>
-  <li class="nav-item dropdown dropstart">
+  <%= turbo_stream_from "notifications_targetuser_#{current_user.id}" %>
+  
+  <li class="nav-item dropdown dropstart me-3">
     <a class="nav-link dropdown-toggle" href="#" 
        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-       <% if @notifications_unread.count == 0 %>
-         <span class="badge rounded-pill text-bg-light">
-           <i class="bi bi-bell"></i>
-         </span>
-       <% else %>
-        <span class="badge rounded-pill text-bg-info">
-            <%= @notifications_unread.count >= 9 ? "9+" : @notifications_unread.count %> 
-            <i class="bi bi-bell"></i>
-        </span>
-       <% end %>
-    </a>
+  
+      <%= render partial: "layouts/notifications/unread_icon", 
+                 locals: { unread_count: @notifications_unread.count } %>
+
+    </a>    
+
     <ul class="dropdown-menu">
+      
       <% @notifications_unread.each do |notification| %>
-        <%= render "layouts/notification", notification: notification %>
+        <%= render "layouts/notifications/notification", notification: notification %>
       <% end %>
+      
       <% if @notifications_unread.count > 0 %>
         <li><%= button_to "  All Unread", destroy_all_unread_notifications_path, 
                           class: "bi bi-trash ms-2",
@@ -30,9 +29,11 @@
           No notifications
         </li>
       <% end %>
+
       <% @notifications_read.each do |notification| %>
-        <%= render "layouts/notification", notification: notification %>
+        <%= render "layouts/notifications/notification", notification: notification %>
       <% end %>
+
       <% if @notifications_read.count > 0 %>
         <li><hr class="dropdown-divider"></li>
         <li><%= button_to "  All Read", destroy_all_read_notifications_path, 

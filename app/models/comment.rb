@@ -8,6 +8,9 @@ class Comment < ApplicationRecord
 
   # Using the Noticed gem
   after_create_commit :notify_recipient
+  #
+  # Enable a Turbo Stream broadcast to auto-refresh notifications for recipient
+  after_create_commit :broadcast_notification_to_postauthor
 
   private
 
@@ -21,5 +24,14 @@ class Comment < ApplicationRecord
   #   which didn't seem worthwhile]
   def self.ransackable_attributes(auth_object = nil)
     [ "body", "title" ]
+  end
+
+  def broadcast_notification_to_postauthor
+    broadcast_replace_to(
+      "notifications_targetuser_#{post.user_id}", # Unique stream per user
+      target: "notifications",                    # DOM ID to replace to
+      partial: "layouts/notifications/unread_icon",
+      locals: { unread_count: post.notifications.unread.count }
+    )
   end
 end

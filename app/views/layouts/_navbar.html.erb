@@ -37,8 +37,8 @@
                <% if current_user.admin? %>
                 <strong>Admin</strong> &raquo
                <% end %>
-              Me<i class="bi bi-arrow-right"></i><strong><%= current_user.username %></strong>
-          </a>
+               Me<i class="bi bi-arrow-right"></i><strong><%= current_user.username %></strong>
+            </a>
           <ul class="dropdown-menu">
             <li><%= link_to "Log Out", logout_path, 
                             class: "dropdown-item", 
@@ -65,14 +65,14 @@
       </ul>
 
       <ul class="navbar-nav">
-        <%= link_to "About", about_path, class: "me-4 nav-link active" %>
+        <%= link_to "About", about_path, class: "me-3 nav-link active" %>
       </ul>
       <ul class="navbar-nav">
-        <%= link_to "", search_path, class:"me-4 bi bi-search" %>
+        <%= link_to "", search_path, class:"me-5 bi bi-search" %>
       </ul> 
 
       <ul class="navbar-nav">
-        <%= render "layouts/notifications" %>
+        <%= render "layouts/notifications/notifications" %>
       </ul>
     </div>
  
