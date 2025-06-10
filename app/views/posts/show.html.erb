@@ -16,14 +16,17 @@
             <p class="card-text text-start"><%= @post.body%></p>
           </div>
           
-          <% if (logged_in? && @post.user == current_user) || current_user.admin? %>
-            <div class="card-footer bg-transparent">
-              <%= link_to "Edit", edit_post_path(@post), class: "btn btn-outline-primary btn-sm" %>
-              <%= button_to "Delete", post_path(@post), 
-                                      class: "btn btn-outline-danger btn-sm",
-                                      method: :delete,
-                                      data: { turbo_confirm: "Are you sure?" } %>
-            </div> 
+          <% if (logged_in? && @post.user == current_user) || (logged_in? && current_user.admin?) %>
+            <div class="justify-content-center">
+              <div class="card-footer bg-transparent">
+                <%= link_to "Edit", edit_post_path(@post), class: "btn btn-outline-primary btn-sm" %>
+                <%= button_to "Delete", post_path(@post), 
+                                        class: "btn btn-outline-danger btn-sm",
+                                        method: :delete,
+                                        data: { turbo_confirm: "Are you sure?" } %>
+              </div>
+            </div>
+
           <% end %>
                 
           <div class="card-footer small text-muted">
@@ -35,16 +38,19 @@
               Categories: <%= render @post.categories %>
             <% end %>
             <div class="small mt-1">
-              <li>Created <%=time_ago_in_words(@post.created_at)%> ago.</li>
-              <li>Edited <%=time_ago_in_words(@post.updated_at)%> ago.</li>
+              <li>Created <%=time_ago_in_words(@post.created_at)%> ago.
+                  Edited <%=time_ago_in_words(@post.updated_at)%> ago.</li>
+              <li><%= "# views: #{@post.views_count}"%></li>
             </div>
           </div>
         </div>
       </div>
 
-      <%= render partial: "comments/form", locals: { comment: Comment.new(parent: nil, 
-                                                     post_id: @post.id, 
-                                                     user_id: current_user.id) } %>
+      <% if logged_in? %>
+        <%= render partial: "comments/form", locals: { comment: Comment.new(parent: nil, 
+                                                      post_id: @post.id, 
+                                                      user_id: current_user.id) } %>
+      <% end %>
 
     </div>
 

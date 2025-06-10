@@ -5,12 +5,12 @@
         <div class="card-header text-center">
           <% if post.user %>
             by: <em><%= link_to post.user.username, user_path(post.user), 
-                          class: 'link-opacity-50-hover text-decoration-none'%> </em>
+                          class: "link-opacity-50-hover text-decoration-none"%></em>
           <% end %>
         </div>
         <div class="card-body text-center shadow mb-2 bg-white rounded">
           <h5 class="card-title"><%= link_to post.title, post_path(post), 
-                                            class: 'link-dark text-decoration-none' %>
+                                             class: "link-dark text-decoration-none" %>
           </h5>
 
           <p class="card-text">
@@ -18,15 +18,16 @@
           </p>
 
           <div class="card-footer bg-transparent">
+            <%= link_to "View", post_path(post), class: "btn btn-outline-success btn-sm" %>
             <% if logged_in? %>
-              <%= link_to "View", post_path(post), class: "btn btn-outline-success btn-sm" %>
-            <% end %>
-            <% if post.user == current_user || current_user.admin? %>
-              <%= link_to "Edit", edit_post_path(post), class: "btn btn-outline-primary btn-sm" %>
-              <%= button_to "Delete", post_path(post), 
-                                      class: "btn btn-outline-danger btn-sm",
-                                      method: :delete,
-                                      data: { turbo_confirm: "Are you sure?" } %>
+              
+              <% if post.user == current_user || current_user.admin? %>
+                <%= link_to "Edit", edit_post_path(post), class: "btn btn-outline-primary btn-sm" %>
+                <%= button_to "Delete", post_path(post), 
+                                        class: "btn btn-outline-danger btn-sm",
+                                        method: :delete,
+                                        data: { turbo_confirm: "Are you sure?" } %>
+              <% end %>
             <% end %>
           </div>       
           <div class="card-footer small mt-1 mb-1 text-muted text-bg-light border ">
@@ -34,8 +35,9 @@
               Categories: <%= render post.categories %>
             <% end %>
             <div class="small mt-1">
-              <li>Created <%=time_ago_in_words(post.created_at)%> ago.</li>
-              <li>Edited <%=time_ago_in_words(post.updated_at)%> ago.</li>
+              <li>Created <%=time_ago_in_words(post.created_at)%> ago.
+                  Edited <%=time_ago_in_words(post.updated_at)%> ago.</li>
+              <li><%= "# views: #{post.views_count}"%></li>
             </div>
           </div>
         </div>

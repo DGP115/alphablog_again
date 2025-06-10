@@ -22,16 +22,18 @@ elapsed = Benchmark.measure do
     puts "Creating Post #{i+1} for someguy"
 
     post = Post.new(title: "This is #{someguy.username} Post #{i+1}",
-                    body: "This is the body for post #{i+1}",
+                    body: ActionText::Content.new(
+                          "This is the <strong>body</strong> for #{someguy.username}'s Post# #{i+1}"),
                     category_ids: category_1.id,
                     user: someguy)
     post.save
 
     5.times do |j|
-      puts "Creating Comment #{j+1} for Post #{i+1} by someguy"
-      comment = Comment.new(body: "This is the body for comment #{j+1} on post #{i+1}",
-                            user: john,
-                            post: post)
+      puts "Creating Comment #{j+1} for Post #{i+1} authored by someguy"
+      comment = Comment.new(
+                body: "This is the body for #{john.username}'s comment #{j+1} on #{someguy.username}'s Post #{i+1}",
+                user: john,
+                post: post)
       comment.save
     end
   end
@@ -40,16 +42,18 @@ elapsed = Benchmark.measure do
     puts "Creating Post #{i+1} for john"
 
     post = Post.new(title: "This is #{john.username}'s Post #{i+1}",
-                    body: "This is the body for post #{i+1}",
+                    body: ActionText::Content.new(
+                          "This is <strong>body</strong> for #{john.username}'s Post# #{i+1}"),
                     category_ids: category_2.id,
                     user: john)
     post.save
 
     5.times do |j|
-      puts "Creating Comment #{j+1} for Post #{i+1} by john"
-      comment = Comment.new(body: "This is the body for comment #{j+1} on post #{i+1}",
-                            user: john,
-                            post: post)
+      puts "Creating Comment #{j+1} for Post #{i+1} authored by john"
+      comment = Comment.new(
+                body: "This is the body for #{someguy.username}'s comment #{j+1} on #{john.username}'s Post# #{i+1}",
+                user: john,
+                post: post)
       comment.save
     end
   end

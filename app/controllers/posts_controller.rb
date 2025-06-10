@@ -10,6 +10,16 @@ class PostsController < ApplicationController
   end
 
   def show
+    #  Keep track of the count of post views.
+    #  Note:  1.  An author can't increment view count of their own posts
+    #         2.  Use a session variable to prevent the same user from incrementing the
+    #             count multiple times in a session
+    session_key = "post_#{@post.id}_viewed"
+    if !session[session_key] && (!logged_in? || current_user.id != @post.user_id)
+      @post.increment!(:views_count)
+      session[session_key] = true
+    end
+
     # In preparation for showing the hierarchical comments for a post:
     # The .arrange method is part of ancestry gem
     @comments = @post.comments.includes(:user).arrange
